@@ -2,6 +2,8 @@
 import argparse
 import mmcv
 import os
+import sys
+sys.path.append('.')
 import torch
 import warnings
 from mmcv import Config, DictAction
@@ -213,7 +215,8 @@ def main():
 
     if not distributed:
         model = MMDataParallel(model, device_ids=[0])
-        outputs = single_gpu_test(model, data_loader, args.show, args.show_dir)
+        # outputs = single_gpu_test(model, data_loader, args.show, args.show_dir)
+        outputs = single_gpu_test(model, data_loader)
     else:
         model = MMDistributedDataParallel(
             model.cuda(),
@@ -244,3 +247,30 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# python3 extra_tools/test.py projects_uvtr/configs/uvtr/multi_modality/uvtr_m_v0075_r101_h5.py pretrained/uvtr_m_v0075_r101_h5.pth --eval=bbox
+
+"""
+Evaluating bboxes of pts_bbox
+mAP: 0.5660                                                                                                           
+mATE: 0.4289
+mASE: 0.4472
+mAOE: 0.4530
+mAVE: 0.3857
+mAAE: 0.2913
+NDS: 0.5824
+Eval time: 4.6s
+
+Per-class results:
+Object Class    AP      ATE     ASE     AOE     AVE     AAE
+car     0.908   0.184   0.156   0.091   0.083   0.067
+truck   0.818   0.148   0.154   0.028   0.059   0.000
+bus     0.985   0.165   0.100   0.037   0.506   0.121
+trailer 0.000   1.000   1.000   1.000   1.000   1.000
+construction_vehicle    0.000   1.000   1.000   1.000   1.000   1.000
+pedestrian      0.865   0.190   0.244   0.295   0.154   0.140
+motorcycle      0.763   0.279   0.287   0.529   0.051   0.003
+bicycle 0.546   0.207   0.209   0.097   0.233   0.000
+traffic_cone    0.775   0.116   0.323   nan     nan     nan
+barrier 0.000   1.000   1.000   1.000   nan     nan
+"""

@@ -1,6 +1,8 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import argparse
 from os import path as osp
+import sys
+sys.path.append('.')
 
 from data_converter import nuscenes_converter as nuscenes_converter
 from data_converter.create_unified_gt_database import create_groundtruth_database

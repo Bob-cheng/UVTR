@@ -51,12 +51,12 @@ def create_groundtruth_database(dataset_class_name,
             use_valid_flag=True,
             pipeline=[
                 dict(
-                    type='LoadPointsFromFile',
+                    type='LoadPointsFromFile_v2',
                     coord_type='LIDAR',
                     load_dim=5,
                     use_dim=5),
                 dict(
-                    type='LoadPointsFromMultiSweeps',
+                    type='LoadPointsFromMultiSweeps_v2',
                     sweeps_num=10,
                     use_dim=[0, 1, 2, 3, 4],
                     pad_empty_sweeps=True,

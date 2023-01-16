@@ -13,9 +13,10 @@ from pyquaternion import Quaternion
 from shapely.geometry import MultiPoint, box
 
 from mmdet3d.core.bbox import points_cam2img
-from projects.mmdet3d_plugin.datasets import NuScenesSweepDataset
+from projects_uvtr.mmdet3d_plugin.datasets import NuScenesSweepDataset
 
-__mmdet3d_version__ = float(mmdet3d.__version__[:3])
+# __mmdet3d_version__ = float(mmdet3d.__version__[:3])
+__mmdet3d_version__ = 0.17
 
 nus_categories = ('car', 'truck', 'trailer', 'bus', 'construction_vehicle',
                   'bicycle', 'motorcycle', 'pedestrian', 'traffic_cone',
