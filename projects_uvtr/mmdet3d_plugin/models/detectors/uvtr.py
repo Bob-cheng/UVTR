@@ -333,11 +333,16 @@ class UVTR(MVXTwoStageDetector):
         """Test function of point cloud branch."""
         outs = self.pts_bbox_head(pts_feat, img_feats, img_metas, img_depth)
         bbox_list = self.pts_bbox_head.get_bboxes(
-            outs, img_metas, rescale=rescale)
-        bbox_results = [
-            bbox3d2result(bboxes, scores, labels)
-            for bboxes, scores, labels in bbox_list
-        ]
+            outs, img_metas, rescale=rescale, **kwargs)
+        bbox_results = []
+        for bboxes, scores, labels, obj_gt_indices in bbox_list:
+            result_dict = bbox3d2result(bboxes, scores, labels)
+            result_dict['obj_gt_indices'] = obj_gt_indices.cpu()
+            bbox_results.append(result_dict)
+        # bbox_results = [
+        #     bbox3d2result(bboxes, scores, labels)
+        #     for bboxes, scores, labels, obj_gt_indices in bbox_list
+        # ]
         return bbox_results
     
     def simple_test(self, img_metas, points=None, img=None, rescale=False, **kwargs):

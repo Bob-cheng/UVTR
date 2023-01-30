@@ -163,7 +163,8 @@ model = dict(
             )
         ),
         bbox_coder=dict(
-            type='NMSFreeCoder',
+            # type='NMSFreeCoder',
+            type='NMSFreeCoder_gti',
             post_center_range=[-61.2, -61.2, -10.0, 61.2, 61.2, 10.0],
             pc_range=point_cloud_range,
             max_num=300,
