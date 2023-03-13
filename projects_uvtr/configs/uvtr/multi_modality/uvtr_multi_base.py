@@ -314,9 +314,13 @@ data = dict(
         use_valid_flag=True,
         box_type_3d='LiDAR'),
     val=dict(pipeline=test_pipeline, classes=class_names, modality=input_modality,
-             ann_file=data_root + "nuscenes_unified_infos_val.pkl"),
+             ann_file=data_root + "nuscenes_unified_infos_val.pkl"
+             ),
     test=dict(pipeline=test_pipeline, classes=class_names, modality=input_modality,
-             ann_file=data_root + "nuscenes_unified_infos_val.pkl"))
+            #  ann_file=data_root + "nuscenes_unified_infos_val.pkl"
+             ann_file=data_root + "nuscenes_unified_infos_train.pkl"
+             )
+             )
 
 optimizer = dict(
     type='AdamW', 

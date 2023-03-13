@@ -253,6 +253,8 @@ class UVTRHead(DETRHead):
         num_bboxes = bbox_pred.size(0)
         # assigner and sampler
         try:
+            # if hasattr(self, 'is_getting_bboxes') and self.is_getting_bboxes:
+            #     self.assigner.cls_cost.weight = 0.00001
             assign_result = self.assigner.assign(bbox_pred, cls_score, gt_bboxes,
                                                 gt_labels, gt_bboxes_ignore)
         except:
@@ -438,6 +440,7 @@ class UVTRHead(DETRHead):
         Returns:
             dict[str, Tensor]: A dictionary of loss components.
         """
+        self.is_getting_bboxes = False
         assert gt_bboxes_ignore is None, \
             f'{self.__class__.__name__} only supports ' \
             f'for gt_bboxes_ignore setting to None.'
@@ -503,6 +506,7 @@ class UVTRHead(DETRHead):
         Returns:
             list[dict]: Decoded bbox, scores and labels after nms.
         """
+        self.is_getting_bboxes = True
         if gt_bboxes_3d is not None and gt_labels_3d is not None:
             cls_scores = preds_dicts["all_cls_scores"][-1]
             bbox_preds = preds_dicts["all_bbox_preds"][-1]
