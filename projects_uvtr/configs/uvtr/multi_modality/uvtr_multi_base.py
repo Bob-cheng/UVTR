@@ -317,8 +317,8 @@ data = dict(
              ann_file=data_root + "nuscenes_unified_infos_val.pkl"
              ),
     test=dict(pipeline=test_pipeline, classes=class_names, modality=input_modality,
-            #  ann_file=data_root + "nuscenes_unified_infos_val.pkl"
-             ann_file=data_root + "nuscenes_unified_infos_train.pkl"
+             ann_file=data_root + "nuscenes_unified_infos_val.pkl"
+            #  ann_file=data_root + "nuscenes_unified_infos_train.pkl"
              )
              )
 

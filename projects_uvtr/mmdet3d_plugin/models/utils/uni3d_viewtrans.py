@@ -128,7 +128,7 @@ class Uni3DViewTrans(BaseModule):
         kwargs['num_sweep'] = num_sweep
         kwargs['num_cam'] = num_cam
         kwargs['batch_size'] = len(mlvl_feats[0])
-        voxel_space = self.depth_proj(mlvl_feats, img_depth=kwargs.pop('img_depth'), **kwargs)
+        voxel_space = self.depth_proj(mlvl_feats, img_depth=kwargs.pop('img_depth'), **kwargs) # torch.Size([1, 256, 5, 180, 180])
         voxel_space = self.feat_encoding(voxel_space, **kwargs)
 
         return voxel_space

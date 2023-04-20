@@ -157,8 +157,9 @@ class UVTRHead(DETRHead):
 
         # transfer to voxel level
         if with_image:
+            # img_feats: torch.Size([1, 6, 256, 116, 200]), img_depth: torch.Size([6, 64, 116, 200])
             img_feats = self.view_trans(img_feats, img_metas=img_metas, img_depth=img_depth)
-        # shape: (N, L, C, D, H, W)
+        # img and lidar shape: (N, L, C, D, H, W) # torch.Size([1, 1, 256, 5, 180, 180])
         if with_point:
             if len(pts_feats.shape) == 5:
                 pts_feats = pts_feats.unsqueeze(1)
